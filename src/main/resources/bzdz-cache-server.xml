@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cache
+        xmlns="http://geode.apache.org/schema/cache"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://geode.apache.org/schema/cache
+                    http://geode.apache.org/schema/cache/cache-1.0.xsd"
+        version="1.0">
+    <cache-server port="40404"/>
+
+    <disk-store name="dataStore" compaction-threshold="50"
+                auto-compact="true" allow-force-compaction="false" max-oplog-size="1024"
+                queue-size="0" time-interval="15" write-buffer-size="32768">
+        <disk-dirs>
+            <disk-dir>gfserver/diskstore/regionstore</disk-dir>
+        </disk-dirs>
+    </disk-store>
+
+    <!--<pdx read-serialized="true"-->
+    <!--persistent="true" disk-store-name="dataStore">-->
+    <!--<pdx-serializer>-->
+    <!--<class-name>com.founder.model.test1.TestObjA</class-name>-->
+    <!--</pdx-serializer>-->
+    <!--</pdx>-->
+    <pdx read-serialized="true"
+         persistent="true"
+         disk-store-name="dataStore">
+    </pdx>
+
+    <region name="BZDZ_ADD_JLXXXB">
+        <region-attributes refid="REPLICATE_PERSISTENT"
+                           statistics-enabled="true" disk-store-name="dataStore"
+                           disk-synchronous="false">
+            <key-constraint>java.lang.String</key-constraint>
+            <cache-listener>
+                <class-name>com.founder.geode.client.listener.MyCacheListener1</class-name>
+            </cache-listener>
+        </region-attributes>
+        <index name="BZDZ_ADD_JLXXXB_Index" from-clause="/BZDZ_ADD_JLXXXB" expression="JLXID"/>
+    </region>
+
+    <region name="BZDZ_ADD_JLXXZQHB">
+        <region-attributes refid="REPLICATE_PERSISTENT"
+                           statistics-enabled="true" disk-store-name="dataStore"
+                           disk-synchronous="false">
+            <key-constraint>java.lang.String</key-constraint>
+            <cache-listener>
+                <class-name>com.founder.geode.client.listener.MyCacheListener1</class-name>
+            </cache-listener>
+        </region-attributes>
+        <index name="BZDZ_ADD_JLXXZQHB_Index" from-clause="/BZDZ_ADD_JLXXZQHB" expression="JLXXZQHID"/>
+    </region>
+
+    <region name="BZDZ_ADD_GAGXTZ_TASK">
+        <region-attributes refid="REPLICATE_PERSISTENT"
+                           statistics-enabled="true" disk-store-name="dataStore"
+                           disk-synchronous="false">
+            <key-constraint>java.lang.Long</key-constraint>
+            <cache-listener>
+                <class-name>com.founder.geode.client.listener.MyCacheListener1</class-name>
+            </cache-listener>
+        </region-attributes>
+        <index name="BZDZ_ADD_GAGXTZ_TASK_Index" from-clause="/BZDZ_ADD_GAGXTZ_TASK" expression="ID"/>
+    </region>
+
+<region name="BZDZ_ADD_JLXZZJGB">
+        <region-attributes refid="REPLICATE_PERSISTENT"
+                           statistics-enabled="true" disk-store-name="dataStore"
+                           disk-synchronous="false">
+            <key-constraint>java.lang.String</key-constraint>
+            <cache-listener>
+                <class-name>com.founder.geode.client.listener.MyCacheListener1</class-name>
+            </cache-listener>
+        </region-attributes>
+        <index name="BZDZ_ADD_JLXZZJGB_Index" from-clause="/BZDZ_ADD_JLXZZJGB" expression="JLXZZJGID"/>
+    </region>
+
+    <region name="BZDZ_ADD_MLDZDXB">
+        <region-attributes refid="REPLICATE_PERSISTENT"
+                           statistics-enabled="true" disk-store-name="dataStore"
+                           disk-synchronous="false">
+            <key-constraint>java.lang.String</key-constraint>
+            <cache-listener>
+                <class-name>com.founder.geode.client.listener.MyCacheListener1</class-name>
+            </cache-listener>
+        </region-attributes>
+        <index name="BZDZ_ADD_MLDZDXB_Index" from-clause="/BZDZ_ADD_MLDZDXB" expression="MLDZID"/>
+    </region>
+
+    <region name="BZDZ_ADD_CHDZDXB">
+        <region-attributes refid="REPLICATE_PERSISTENT"
+                           statistics-enabled="true" disk-store-name="dataStore"
+                           disk-synchronous="false">
+            <key-constraint>java.lang.String</key-constraint>
+            <cache-listener>
+                <class-name>com.founder.geode.client.listener.MyCacheListener1</class-name>
+            </cache-listener>
+        </region-attributes>
+        <index name="BZDZ_ADD_CHDZDXB_Index" from-clause="/BZDZ_ADD_CHDZDXB" expression="CHDZID"/>
+    </region>
+
+</cache>

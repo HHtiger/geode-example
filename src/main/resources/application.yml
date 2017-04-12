@@ -1,0 +1,37 @@
+#java -jar -Dspring.config.location=application.yml springboot.jar
+spring:
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@xxx:1521:ORCL
+      username: manager
+      password: manager
+      initialSize: 5
+      maxActive: 20
+      validationQuery: SELECT 2 from DUAL
+      testOnBorrow: true
+      testWhileIdle: true
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 100
+      proxyFilters:
+        - !!com.alibaba.druid.filter.stat.StatFilter
+          mergeSql: true
+          slowSqlMillis: 1000
+          logSlowSql: true
+#        - !!com.tiger.config.datasource.filter.MyDruidLogFilter
+#          connectionLogEnabled: false
+#          statementLogEnabled: false
+#          resultSetLogEnabled: false
+#          statementExecutableSqlLogEnable: true
+#          showExecutTime: true
+
+server:
+  port: 8080
+
+logging:
+  config: classpath:log4j2.xml
+#    druid.sql.Statement: debug
+#    com.founder.mapper: debug
+#    com.fonder: DEBUG
+

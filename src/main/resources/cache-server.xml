@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cache
+        xmlns="http://geode.apache.org/schema/cache"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://geode.apache.org/schema/cache
+                    http://geode.apache.org/schema/cache/cache-1.0.xsd"
+        version="1.0">
+    <cache-server port="40404"/>
+
+    <disk-store name="dataStore" compaction-threshold="50"
+                auto-compact="true" allow-force-compaction="false" max-oplog-size="1024"
+                queue-size="0" time-interval="15" write-buffer-size="32768">
+        <disk-dirs>
+            <disk-dir>gfserver/diskstore/regionstore</disk-dir>
+        </disk-dirs>
+    </disk-store>
+
+    <!--<pdx read-serialized="true"-->
+         <!--persistent="true" disk-store-name="dataStore">-->
+        <!--<pdx-serializer>-->
+            <!--<class-name>com.founder.model.test1.TestObjA</class-name>-->
+        <!--</pdx-serializer>-->
+    <!--</pdx>-->
+    <pdx read-serialized="true"
+         persistent="true"
+         disk-store-name="dataStore">
+    </pdx>
+
+    <region name="TestObjA">
+        <region-attributes refid="REPLICATE_PERSISTENT"
+                           statistics-enabled="true" disk-store-name="dataStore"
+                           disk-synchronous="false" >
+            <key-constraint>java.lang.Integer</key-constraint>
+            <cache-listener>
+                <class-name>com.founder.geode.client.listener.MyCacheListener1</class-name>
+            </cache-listener>
+        </region-attributes>
+        <index name="TestObjAIndex" from-clause="/TestObjA a" expression="a.id" />
+    </region>
+
+    <region name="TestObjB">
+        <region-attributes refid="REPLICATE_PERSISTENT"
+                           statistics-enabled="true" disk-store-name="dataStore"
+                           disk-synchronous="false" >
+            <key-constraint>java.lang.Integer</key-constraint>
+            <cache-listener>
+                <class-name>com.founder.geode.client.listener.MyCacheListener1</class-name>
+            </cache-listener>
+        </region-attributes>
+        <index name="TestObjBIndex" from-clause="/TestObjB b" expression="b.id" />
+    </region>
+
+    <region name="TestObjC">
+        <region-attributes refid="REPLICATE_PERSISTENT"
+                           statistics-enabled="true" disk-store-name="dataStore"
+                           disk-synchronous="false" >
+            <key-constraint>java.lang.Integer</key-constraint>
+            <cache-listener>
+                <class-name>com.founder.geode.client.listener.MyCacheListener1</class-name>
+            </cache-listener>
+        </region-attributes>
+        <index name="TestObjCIndex" from-clause="/TestObjC c" expression="c.id" />
+    </region>
+
+</cache>
